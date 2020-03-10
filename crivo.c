@@ -3,12 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// TODOS OS VALORES PRIMOS DE 0 A N
-void main()
+int main()
 {
     int const l = 100;
     int vet[100];
-    for (int i = 1; i < l; i += 2)
+    for (int i = 1; i < l; i++)
     {
         vet[i] = i;
     }
@@ -16,6 +15,10 @@ void main()
 #pragma omp parallel for
     for (int i = 0; i < l; i++)
     {
+        if (vet[i] % 2 == 0)
+        {
+            vet[i] = -1;
+        }
         if (vet[i] % 3 == 0 && vet[i] != 3)
         {
             vet[i] = -1;
@@ -37,4 +40,6 @@ void main()
             printf("%d ", vet[i]);
         }
     }
+
+    return 1;
 }
